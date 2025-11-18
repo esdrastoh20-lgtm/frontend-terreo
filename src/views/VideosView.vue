@@ -148,6 +148,9 @@
               <div class="video-stats">
                 <span class="stat-item">👍 {{ video.likes }}</span>
               </div>
+              <div class="video-level">
+                {{ coursesStore.getLevelById(videosStore.selectedLevel)?.name }}
+              </div>
             </div>
           </div>
         </div>
@@ -646,6 +649,17 @@ const formatDate = (date) => {
   gap: 1rem;
   font-size: 0.875rem;
   color: #666;
+}
+
+.video-level {
+  margin-top: 0.75rem;
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: #2563eb;
+  background: #e0ecff;
+  padding: 0.2rem 0.6rem;
+  border-radius: 999px;
+  display: inline-block;
 }
 
 .no-videos {

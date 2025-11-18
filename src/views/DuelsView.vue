@@ -43,15 +43,16 @@
       <!-- Code de duel généré -->
       <div v-if="duelsStore.duelCode" class="duel-code-section">
         <div class="code-card">
-          <h3>Votre code de duel</h3>
+          <h3>Salle d'attente du duel</h3>
           <div class="code-display">
             <span class="code-value">{{ duelsStore.duelCode }}</span>
             <button @click="copyCode" class="btn-copy">📋 Copier</button>
           </div>
           <p class="code-instructions">
             Partagez ce code avec votre adversaire pour qu'il puisse rejoindre le duel.
+            Lorsque vous voyez qu'il a rejoint (via vos échanges), vous pouvez lancer le duel.
           </p>
-          <button @click="startDuelExam" class="btn-start-duel">Commencer le duel</button>
+          <button @click="startDuelExam" class="btn-start-duel">Lancer le duel</button>
         </div>
       </div>
 

@@ -589,7 +589,7 @@ function formatTime(seconds) {
 
 .timer-label {
   font-size: 0.875rem;
-  color: #666;
+  color: #1d4ed8;
   margin-bottom: 0.25rem;
 }
 
@@ -635,6 +635,7 @@ function formatTime(seconds) {
   font-size: 2rem;
   margin-bottom: 2rem;
   text-align: center;
+  color: #16a34a;
 }
 
 .exam-details {
@@ -656,12 +657,12 @@ function formatTime(seconds) {
 }
 
 .detail-label {
-  color: #111827;
+  color: #1d4ed8;
 }
 
 .detail-value {
   font-weight: 600;
-  color: #111827;
+  color: #047857;
 }
 
 .instructions {
@@ -671,6 +672,7 @@ function formatTime(seconds) {
 .instructions h3 {
   font-size: 1.25rem;
   margin-bottom: 1rem;
+  color: #111827;
 }
 
 .instructions ul {
@@ -682,6 +684,8 @@ function formatTime(seconds) {
   padding: 0.5rem 0;
   padding-left: 1.5rem;
   position: relative;
+  color: #1d4ed8;
+  font-weight: 500;
 }
 
 .instructions li:before {

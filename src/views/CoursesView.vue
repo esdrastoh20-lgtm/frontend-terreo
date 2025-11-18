@@ -608,7 +608,7 @@ onMounted(async () => {
 .course-card {
   background: radial-gradient(circle at top left, #ffffff, #f9fafb);
   border-radius: 18px;
-  padding: 1.75rem 1.5rem;
+  padding: 1.75rem 1.5rem 1.5rem;
   box-shadow: 0 10px 30px rgba(15, 23, 42, 0.08);
   transition: all 0.3s;
   border: 1px solid rgba(148, 163, 184, 0.45);
@@ -668,8 +668,8 @@ onMounted(async () => {
 
 .course-card h3 {
   color: #333;
-  font-size: 1.2rem;
-  margin-bottom: 0.75rem;
+  font-size: 1.25rem;
+  margin-bottom: 0.5rem;
   font-weight: 600;
 }
 
@@ -677,7 +677,7 @@ onMounted(async () => {
   color: #666;
   font-size: 0.95rem;
   line-height: 1.6;
-  margin-bottom: 1rem;
+  margin-bottom: 0.85rem;
 }
 
 .course-meta {
@@ -720,6 +720,8 @@ onMounted(async () => {
   display: flex;
   flex-direction: column;
   gap: 0.75rem;
+  padding-top: 0.75rem;
+  border-top: 1px solid rgba(209, 213, 219, 0.7);
 }
 
 .btn-course {

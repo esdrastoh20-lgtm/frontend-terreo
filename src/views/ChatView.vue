@@ -122,6 +122,33 @@
             <div class="message-content">
               <div class="message-text">{{ message.text }}</div>
               <div class="message-time">{{ formatTime(message.timestamp) }}</div>
+              <div
+                v-if="isDuelMessage(message.text)"
+                class="duel-invitation"
+              >
+                <div class="duel-invitation-title">Demande de duel</div>
+                <div class="duel-invitation-details">
+                  <span class="duel-code">Code : {{ getDuelInfo(message.text)?.code }}</span>
+                  <span
+                    v-if="getDuelInfo(message.text)?.domain"
+                    class="duel-meta"
+                  >
+                    Domaine : {{ getDuelInfo(message.text)?.domain }}
+                  </span>
+                  <span
+                    v-if="getDuelInfo(message.text)?.level"
+                    class="duel-meta"
+                  >
+                    Niveau : {{ getDuelInfo(message.text)?.level }}
+                  </span>
+                </div>
+                <button
+                  class="btn-duel-open"
+                  @click="openDuelFromMessage(message.text)"
+                >
+                  Ouvrir le duel
+                </button>
+              </div>
             </div>
           </div>
         </div>
@@ -260,6 +287,50 @@ const formatTime = (date) => {
   if (diff < 604800000) return `Il y a ${Math.floor(diff / 86400000)} j`
   
   return messageDate.toLocaleDateString('fr-FR', { day: 'numeric', month: 'short' })
+}
+
+const isDuelMessage = (text) => {
+  if (!text) return false
+  // On considère qu'un message est une demande de duel s'il contient un "Code:" suivi d'un code alphanumérique
+  return /Code:\s*[A-Z0-9]{4,}/i.test(text)
+}
+
+const getDuelInfo = (text) => {
+  const info = {
+    code: null,
+    domain: null,
+    level: null
+  }
+
+  const codeMatch = text.match(/Code:\s*([A-Z0-9]+)/i)
+  if (codeMatch) {
+    info.code = codeMatch[1]
+  }
+
+  const domainMatch = text.match(/Domaine:\s*([^,]+)/i)
+  if (domainMatch) {
+    info.domain = domainMatch[1].trim()
+  }
+
+  const levelMatch = text.match(/Niveau:\s*([^,]+)/i)
+  if (levelMatch) {
+    info.level = levelMatch[1].trim()
+  }
+
+  return info
+}
+
+const openDuelFromMessage = (text) => {
+  const info = getDuelInfo(text)
+  if (!info || !info.code) return
+
+  try {
+    if (navigator && navigator.clipboard && navigator.clipboard.writeText) {
+      navigator.clipboard.writeText(info.code)
+    }
+  } catch (e) {}
+
+  router.push('/duels')
 }
 
 const handleLogout = () => {
@@ -760,6 +831,54 @@ watch(() => chatStore.activeMessages, () => {
   font-size: 0.75rem;
   color: #666;
   padding: 0 0.5rem;
+}
+
+.duel-invitation {
+  margin-top: 0.25rem;
+  padding: 0.5rem 0.75rem;
+  border-radius: 10px;
+  background: #ecfdf5;
+  border: 1px solid #6ee7b7;
+  font-size: 0.8rem;
+  color: #065f46;
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+}
+
+.duel-invitation-title {
+  font-weight: 600;
+}
+
+.duel-invitation-details {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+.duel-code {
+  font-weight: 600;
+}
+
+.duel-meta {
+  color: #047857;
+}
+
+.btn-duel-open {
+  margin-top: 0.25rem;
+  align-self: flex-start;
+  padding: 0.3rem 0.8rem;
+  font-size: 0.8rem;
+  border-radius: 999px;
+  border: none;
+  background: #10b981;
+  color: #ffffff;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+
+.btn-duel-open:hover {
+  background: #059669;
 }
 
 .chat-input-container {
